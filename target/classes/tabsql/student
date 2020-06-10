@@ -1,0 +1,7 @@
+-- 创建学生成绩表 
+CREATE TABLE `student` (
+  `studentid` int(10) NOT NULL AUTO_INCREMENT COMMENT '学生ID',
+  `studentname` varchar(100) NOT NULL COMMENT '学生名称',
+  `studentscore` int(11) NOT NULL COMMENT '学生成绩',
+  PRIMARY KEY (`studentid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='学生成绩表'

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpxx.dao.jkgpxxzbDao">
+	<insert id="insertjkgpxxzb" parameterType="jkgpxxzb">
+		INSERT ignore INTO
+		jkgpxxzb (gpid,gpmc,dqjg,jkjg,sfjk,jkcs,objemail)
+		VALUES
+		(#{gpid},#{gpmc},#{dqjg},#{jkjg},#{sfjk},#{jkcs},#{objemail})
+	</insert>
+
+	<select id="sel_jkgpxxzb_gpid" resultType="jkgpxxzb"
+		parameterType="String">
+		<!-- 具体的sql -->
+		select *from jkgpxxzb where gpid = #{gpid}
+	</select>
+
+	<select id="sel_jkgpxxzb_gpmc" resultType="jkgpxxzb"
+		parameterType="String">
+		<!-- 具体的sql -->
+		select *from jkgpxxzb where gpmc = #{gpmc}
+	</select>
+
+
+	<select id="sel_jkgpxxzb_all" resultType="jkgpxxzb">
+		<!-- 具体的sql -->
+		select *from jkgpxxzb
+	</select>
+
+	<!-- 查询需要监控的股票信息 -->
+	<select id="sel_jkgpxxzb_sfjk_1" resultType="jkgpxxzb" parameterType="String" >
+		<!-- 具体的sql -->
+		select *from jkgpxxzb where sfjk=#{sfjk};
+	</select>
+
+	<delete id="del_gpxxzb_gpid" parameterType="String"
+		flushCache="true" statementType="PREPARED" timeout="20">
+		delete from
+		jkgpxxzb where gpid=#{gpid}
+	</delete>
+
+	<update id="upd_gpxxzb_gpid" parameterType="jkgpxxzb">
+		update jkgpxxzb
+		<set>
+			<if test="gpid!= null">gpid=#{gpid},</if>
+			<if test="gpmc != null">gpmc=#{gpmc},</if>
+			<if test="dqjg!= null">dqjg=#{dqjg},</if>
+			<if test="jkjg != null">jkjg=#{jkjg},</if>
+			<if test="sfjk!= null">sfjk=#{sfjk},</if>
+			<if test="jkcs!= null">jkcs=#{jkcs},</if>
+			<if test="objemail!= null">objemail=#{objemail},</if>
+		</set>
+		where gpid=#{gpid}
+	</update>
+
+
+		<update id="upd_gpxxzb_sfjk_gpid" >
+		update jkgpxxzb set sfjk=#{0}  where gpid=#{1}
+	</update>
+	
+
+
+</mapper>

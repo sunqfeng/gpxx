@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpxx.dao.userinfoDao">
+
+	<select id="sel_userinfo_userid" resultType="userinfo"
+		parameterType="String">
+		<!-- 具体的sql -->
+		select *from userinfo where userid = #{userid}
+	</select>
+
+	<select id="sel_userinfo_username" resultType="userinfo"
+		parameterType="String">
+		<!-- 具体的sql -->
+		select *from userinfo where username = #{username}
+	</select>
+
+	<select id="sel_userinfo_username_and_passwd"
+		resultType="userinfo">
+		<!-- 具体的sql -->
+		select *from userinfo where username = #{0} and passwd=#{1}
+	</select>
+
+	<select id="upd_userinfo_loginstatus_username" resultType="Integer">
+		<!-- 具体的sql -->
+		update userinfo set loginstatus=#{0} where username=#{1}
+	</select>
+
+
+
+	<insert id="insert_userinfo" parameterType="userinfo">
+		insert ignore into
+		userinfo(userid,username,passwd,email,telephone,address,role,loginstatus)
+		values(#{userid,jdbcType=VARCHAR}, #{username,jdbcType=
+		VARCHAR},#{passwd,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR,jdbcType=VARCHAR},#{telephone,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{role,jdbcType=VARCHAR},#{loginstatus,jdbcType=VARCHAR})
+	</insert>
+
+</mapper>

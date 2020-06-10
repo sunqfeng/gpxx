@@ -1,0 +1,12 @@
+-- 创建用户信息表
+CREATE TABLE `userinfo` (
+  `userid` varchar(100) NOT NULL  COMMENT '用户id',
+  `username` varchar(100) NOT NULL COMMENT '用户名',
+  `passwd` varchar(100) NOT NULL COMMENT '用户密码',
+  `email` varchar(20)  COMMENT '用户邮箱',
+  `telephone` varchar(12)  COMMENT '用户电话',
+  `address` varchar(100)  COMMENT '地址',
+  `role`    varchar(10)   COMMENT '角色',
+  `loginstatus`    varchar(2)   COMMENT '登录状态',
+  PRIMARY KEY (`userid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='用户信息表';

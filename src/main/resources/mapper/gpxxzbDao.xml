@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpxx.dao.gpxxzbDao">
+	<insert id="insertgpxxzb" parameterType="gpxxzb">
+		INSERT ignore INTO gpxxzb (gpid,gpmc,mrsj,mrjg,mcsj,mcjg,gpsl,gpje,gpts,gpsy)
+		VALUES (#{gpid},#{gpmc},#{mrsj},#{mrjg},#{mcsj},#{mcjg},#{gpsl},#{gpje},#{gpts},#{gpsy})
+	</insert>
+
+	<select id="sel_gpxxzb_gpid" resultType="gpxxzb" parameterType="int">
+		<!-- 具体的sql -->
+		select *from gpxxzb where gpid = #{gpid}
+	</select>
+
+	<select id="sel_gpxxzb_gpmc" resultType="gpxxzb" parameterType="String">
+		<!-- 具体的sql -->
+		select *from gpxxzb where gpmc = #{gpmc}
+	</select>
+	
+
+	<select id="sel_gpxxzb_all" resultType="gpxxzb">
+		<!-- 具体的sql -->
+		select *from gpxxzb
+	</select>
+	
+	<select id="del_gpxxzb_gpid" parameterType="String" resultType="Integer">
+	<!-- 具体的sql -->
+		delete from gpxxzb  where gpid=#{gpid};
+	</select>
+	
+	
+	
+</mapper>

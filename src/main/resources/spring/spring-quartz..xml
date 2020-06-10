@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- quartz-2.x的配置 -->
+
+	<!-- 定时任务的bean -->
+	<bean id="testQuartzJob" class="com.gpxx.monitordata.monitorgp" />
+
+	<!-- 1) 调度的配置&job的配置 -->
+	<bean id="testQuartzJob_ct"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="testQuartzJob_jd" />
+		</property>
+		<property name="cronExpression" value="*/50 * * * * ?">
+		</property>
+	</bean>
+	<bean id="testQuartzJob_jd"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="testQuartzJob" />
+		</property>
+		<property name="targetMethod" value="monitor_gp">
+		</property>
+	</bean>
+
+	<!-- 3) 开启定时任务 -->
+	<bean id="startQuertz"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="testQuartzJob_ct" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

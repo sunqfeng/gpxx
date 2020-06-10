@@ -1,0 +1,11 @@
+-- 创建监控股票信息主表
+CREATE TABLE `jkgpxxzb` (
+  `gpid` varchar(100) NOT NULL  COMMENT '股票id',
+  `gpmc` varchar(100)  COMMENT '股票名称',
+  `dqjg` double(16,8)  COMMENT '当前价格',
+  `jkjg` double(16,8)  COMMENT '监控价格',
+  `sfjk` varchar(2)  COMMENT '是否监控',
+  `jkcs` int(4)  COMMENT '监控次数',
+  `objemail` varchar(20)  COMMENT '邮箱地址',
+  PRIMARY KEY (`gpid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='监控股票信息主表'
