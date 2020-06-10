@@ -22,6 +22,12 @@
 		select *from jkgpxxzb where gpmc = #{gpmc}
 	</select>
 
+	<select id="sel_jkgpxxzb_like_gpmc" resultType="jkgpxxzb"
+		parameterType="String">
+		<!-- 具体的sql -->
+		select *from jkgpxxzb where gpmc like #{gpmc}
+	</select>
+
 
 	<select id="sel_jkgpxxzb_all" resultType="jkgpxxzb">
 		<!-- 具体的sql -->
@@ -29,7 +35,8 @@
 	</select>
 
 	<!-- 查询需要监控的股票信息 -->
-	<select id="sel_jkgpxxzb_sfjk_1" resultType="jkgpxxzb" parameterType="String" >
+	<select id="sel_jkgpxxzb_sfjk_1" resultType="jkgpxxzb"
+		parameterType="String">
 		<!-- 具体的sql -->
 		select *from jkgpxxzb where sfjk=#{sfjk};
 	</select>
@@ -55,10 +62,11 @@
 	</update>
 
 
-		<update id="upd_gpxxzb_sfjk_gpid" >
-		update jkgpxxzb set sfjk=#{0}  where gpid=#{1}
+	<update id="upd_gpxxzb_sfjk_gpid">
+		update jkgpxxzb set sfjk=#{0}
+		where gpid=#{1}
 	</update>
-	
+
 
 
 </mapper>

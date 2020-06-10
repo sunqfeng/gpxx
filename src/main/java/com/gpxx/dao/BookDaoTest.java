@@ -20,23 +20,29 @@ public class BookDaoTest extends  BaseTest
 	@Autowired
 //	private userinfoserviceimp sqf;
 //	private userinfo stuserinfo;
-	private userinfoDao userinfodao;
+//	private userinfoDao userinfodao;
 //	private emailDao emaildao;
-//	private jkgpxxzbDao stjkgpxxzbdao ;
+	private jkgpxxzbDao stjkgpxxzbdao ;
 
 	@Test
 	public void testsqf()
 	{
 		EmailEnt emailEnt = new EmailEnt();
+
+		List<jkgpxxzb> list_jkgp = new ArrayList<jkgpxxzb>();
 		try
 		{
-			userinfodao.upd_userinfo_loginstatus_username("8", "sunqifeng");
+		list_jkgp =	stjkgpxxzbdao.sel_jkgpxxzb_like_gpmc("%酒店%");
 		} catch (Exception e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("sqf=="+emailEnt.getSedemail() );
+		for(int i=0;i<list_jkgp.size();i++)
+		{
+			
+			System.out.println("sqf000"+list_jkgp.get(i));
+		}
 
 	}
 	

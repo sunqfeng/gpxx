@@ -95,6 +95,7 @@ var vmm = new Vue({
         handleClose() { //editUser 界面右上面那个X的触发事件
             this.dialogVisible = false;
             this.adddialogVisible = false;
+            this.edit_dialogVisible = false;
         },
 
         //确认按钮
@@ -178,9 +179,9 @@ var vmm = new Vue({
         },
         onSubmit(searchObj) { //根据股票id查询股票信息的确认按钮
 
-            if (!searchObj.gpid) {
+            if (!searchObj.gpid && !searchObj.gpmc) {
                 this.$message({
-                    message: '请输入股票id',
+                    message: '请输入股票id或股票名称',
                     type: 'warning'
                 });
                 return

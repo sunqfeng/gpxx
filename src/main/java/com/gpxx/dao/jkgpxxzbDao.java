@@ -68,4 +68,12 @@ public interface jkgpxxzbDao
 	 */
 	Integer upd_gpxxzb_sfjk_gpid(String sfjk,String gpid);
 
+
+	/**
+	 * 根据股票名称进行模糊查询
+	 * @param gpmc
+	 * @return
+	 */
+	List<jkgpxxzb> sel_jkgpxxzb_like_gpmc(@Param("gpmc")String gpmc );
+
 }

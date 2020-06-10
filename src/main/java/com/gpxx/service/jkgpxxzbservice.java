@@ -61,4 +61,13 @@ public interface jkgpxxzbservice
 	 */
 	List<jkgpxxzb> sel_jkgpxxzb_sfjk_1(String sfjk);
 
+
+	/**
+	 * 根据股票名称模糊查询股票信息
+	 * @param gpmc
+	 * @return
+	 */
+
+	List<jkgpxxzb> sel_jkgpxxzb_like_gpmc(@Param("gpmc")String gpmc );
+
 }

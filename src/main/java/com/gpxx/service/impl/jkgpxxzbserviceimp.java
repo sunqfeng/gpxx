@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ls.LSInput;
 
 import com.gpxx.dao.gpxxzbDao;
 import com.gpxx.dao.jkgpxxzbDao;
@@ -32,6 +33,8 @@ public class jkgpxxzbserviceimp implements jkgpxxzbservice
 	GetGpxx getGpxx = new GetGpxx();
 
 	WebGpxx webgpxx = null;
+
+	List<jkgpxxzb> list_jkgpxx = new ArrayList<jkgpxxzb>();
 
 	public int insertjkgpxxzb(jkgpxxzb stjkgpxxzb)
 	{
@@ -133,6 +136,13 @@ public class jkgpxxzbserviceimp implements jkgpxxzbservice
 	{
 
 		return stjkgpxxzbdao.sel_jkgpxxzb_sfjk_1(sfjk);
+	}
+
+	public List<jkgpxxzb> sel_jkgpxxzb_like_gpmc(String gpmc)
+	{
+		// TODO Auto-generated method stub
+		list_jkgpxx = stjkgpxxzbdao.sel_jkgpxxzb_like_gpmc(gpmc);
+		return list_jkgpxx;
 	}
 
 }
