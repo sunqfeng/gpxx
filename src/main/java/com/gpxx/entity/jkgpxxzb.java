@@ -10,6 +10,7 @@ public class jkgpxxzb
 	public String sfjk = "";
 	public Integer jkcs =0;
 	public String objemail = "";
+	public String ljy = "";
 
 	public String getGpid()
 	{
@@ -71,6 +72,15 @@ public class jkgpxxzb
 		this.objemail = objemail;
 	}
 
+
+	public String getLjy()
+	{
+		return ljy;
+	}
+	public void setLjy(String ljy)
+	{
+		this.ljy = ljy;
+	}
 	@Override
 	public String toString()
 	{

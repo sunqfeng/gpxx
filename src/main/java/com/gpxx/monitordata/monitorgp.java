@@ -30,7 +30,7 @@ public class monitorgp
 	private jkgpxxzbDao stjkgpxxzbdao;
 
 	@Autowired
-	private emailDao    stEmailDao;
+	private emailDao stEmailDao;
 
 	Email stEmail = new Email();
 
@@ -40,36 +40,38 @@ public class monitorgp
 
 	EmailEnt stEmailEnt = new EmailEnt();
 
-	
 	public void monitor_gp()
 	{
 
 		List<jkgpxxzb> list_jkgpxxzb = new ArrayList<jkgpxxzb>();
 
-		list_jkgpxxzb = stjkgpxxzbdao.sel_jkgpxxzb_sfjk_1("1"); //查询需要监控的股票信息
-		if ( list_jkgpxxzb.isEmpty() )
+		list_jkgpxxzb = stjkgpxxzbdao.sel_jkgpxxzb_sfjk_1("1"); // 查询需要监控的股票信息
+		if (list_jkgpxxzb.isEmpty())
 		{
-			return ;
+			return;
 		}
 
 		stEmailEnt = stEmailDao.sel_email_all();
-
 
 		for (int i = 0; i < list_jkgpxxzb.size(); i++)
 		{
 			System.out.println("sqf=" + list_jkgpxxzb.get(i));
 			webGpxx = getGpxx.doget(list_jkgpxxzb.get(i).getGpid());
-			//如果当前价格大于监控的价格，发送邮箱
-			if ( webGpxx.getDqjg() > list_jkgpxxzb.get(i).getJkjg() )
+			// 如果当前价格大于监控的价格，发送邮箱
+			if ((webGpxx.getDqjg() > list_jkgpxxzb.get(i).getJkjg() && list_jkgpxxzb.get(i).getLjy().equals(">"))
+					|| (webGpxx.getDqjg() < list_jkgpxxzb.get(i).getJkjg() && list_jkgpxxzb.get(i).getLjy().equals("<"))
+					|| (webGpxx.getDqjg() == list_jkgpxxzb.get(i).getJkjg()
+							&& list_jkgpxxzb.get(i).getLjy().equals("=")))
 			{
-				//设置邮件标题，邮件内容
+				// 设置邮件标题，邮件内容
 				stEmailEnt.setEmailbt("股票信息");
-				String gpnr =list_jkgpxxzb.get(i).getGpmc()+"当前股票价格="+String.valueOf(webGpxx.getDqjg()) + " | "+ "监控的价格"+String.valueOf(list_jkgpxxzb.get(i).getJkjg());
+				String gpnr = list_jkgpxxzb.get(i).getGpmc() + "当前股票价格=" + String.valueOf(webGpxx.getDqjg()) + " | "
+						+ "监控的价格" + String.valueOf(list_jkgpxxzb.get(i).getJkjg());
 				stEmailEnt.setEmailnr(gpnr);
 				stEmailEnt.setObjemail(list_jkgpxxzb.get(i).getObjemail());
 				try
 				{
-					stEmail.SendEmail(stEmailEnt); //发送邮件
+					stEmail.SendEmail(stEmailEnt); // 发送邮件
 				} catch (GeneralSecurityException e)
 				{
 					// TODO Auto-generated catch block
@@ -79,8 +81,8 @@ public class monitorgp
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				//邮件发送以后更新股票监控状态为0
-				stjkgpxxzbdao.upd_gpxxzb_sfjk_gpid("0",list_jkgpxxzb.get(i).getGpid() );
+				// 邮件发送以后更新股票监控状态为0
+				stjkgpxxzbdao.upd_gpxxzb_sfjk_gpid("0", list_jkgpxxzb.get(i).getGpid());
 			}
 		}
 

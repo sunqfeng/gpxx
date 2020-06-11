@@ -9,14 +9,16 @@ var vmm = new Vue({
             edit_dialogVisible: false, //编辑界面初始值
             eidt_input_gpid: true, //编辑gpid初始值为可编辑.
             userIndex: 0, //初始化变量值
+            sel_value: '',
             gpxx: {
                 gpid: '',
                 gpmc: '',
                 dqjg: '',
                 jkjg: '',
                 sfjk: '',
-                jkcs:'', 
-                objemail:'',
+                jkcs: '',
+                objemail: '',
+                ljy: '',
             },
 
             editObj: {
@@ -24,8 +26,9 @@ var vmm = new Vue({
                 gpmc: '',
                 jkjg: '',
                 sfjk: '',
-                jkcs: '', 
+                jkcs: '',
                 objemail: '',
+                ljy:'',
             },
 
             addObj: {
@@ -35,11 +38,22 @@ var vmm = new Vue({
                 sfjk: '',
                 jkcs: '',
                 objemail: '',
+                ljy: '',
             },
             searchObj: {
                 gpid: '',
                 gpmc: '',
-            }
+            },
+            options: [{
+                value: '>',
+                label: '大于'
+            }, {
+                value: '=',
+                label: '等于',
+            }, {
+                value: '<',
+                label: '小于'
+            }],
         }
     },
     methods: {
@@ -143,7 +157,9 @@ var vmm = new Vue({
                 return
             }
 
+            console.log("sqf0000" + this.sel_value);
 
+            this.addObj.ljy = this.sel_value;
             this.adddialogVisible = false;
             var tmpgpid = this.addObj.gpid;
 
@@ -219,11 +235,14 @@ var vmm = new Vue({
             };
         },
         //编辑股票信息界面-确认按钮
-        editgpxxconfirm(editObj) {
+        editgpxxconfirm(editObj,sel_value) {
             this.tableData = []; //清空界面
             var tabld = this.tableData;
             this.edit_dialogVisible = false; //确认以后把editUser的界面隐藏起来
             var tmpgpid = this.editObj.gpid;
+            this.editObj.ljy = sel_value;
+            console.log("wocao"+sel_value);
+            
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",

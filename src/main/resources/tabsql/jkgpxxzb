@@ -7,5 +7,6 @@ CREATE TABLE `jkgpxxzb` (
   `sfjk` varchar(2)  COMMENT '是否监控',
   `jkcs` int(4)  COMMENT '监控次数',
   `objemail` varchar(20)  COMMENT '邮箱地址',
+  `ljy`     varchar(4) COMMENT '逻辑与(大于监控价格、等于监控价格、小于监控价格)',
   PRIMARY KEY (`gpid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='监控股票信息主表'

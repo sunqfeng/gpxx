@@ -5,9 +5,9 @@
 <mapper namespace="com.gpxx.dao.jkgpxxzbDao">
 	<insert id="insertjkgpxxzb" parameterType="jkgpxxzb">
 		INSERT ignore INTO
-		jkgpxxzb (gpid,gpmc,dqjg,jkjg,sfjk,jkcs,objemail)
+		jkgpxxzb (gpid,gpmc,dqjg,jkjg,sfjk,jkcs,objemail,ljy)
 		VALUES
-		(#{gpid},#{gpmc},#{dqjg},#{jkjg},#{sfjk},#{jkcs},#{objemail})
+		(#{gpid},#{gpmc},#{dqjg},#{jkjg},#{sfjk},#{jkcs},#{objemail},#{ljy})
 	</insert>
 
 	<select id="sel_jkgpxxzb_gpid" resultType="jkgpxxzb"
@@ -57,6 +57,7 @@
 			<if test="sfjk!= null">sfjk=#{sfjk},</if>
 			<if test="jkcs!= null">jkcs=#{jkcs},</if>
 			<if test="objemail!= null">objemail=#{objemail},</if>
+			<if test="ljy!= null">ljy=#{ljy},</if>
 		</set>
 		where gpid=#{gpid}
 	</update>

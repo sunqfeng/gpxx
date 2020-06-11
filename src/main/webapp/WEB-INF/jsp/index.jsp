@@ -12,7 +12,7 @@
     <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
     <link rel="stylesheet" href="/gpxx/css/element.css">
     <link rel="stylesheet" href="/gpxx/css/index.css">
-    <link rel="shortcut icon" href="#"/>
+    <link rel="shortcut icon" href="#" />
 </head>
 
 <body>
@@ -20,7 +20,7 @@
         <!--搜索界面 -->
         <h1>股票监控界面</h1>
         <!--查询界面-->
-        <el-form :inline="true" :model="searchObj" ref="searchObj"  class="demo-form-inline">
+        <el-form :inline="true" :model="searchObj" ref="searchObj" class="demo-form-inline">
             <el-form-item label="">
                 <el-input v-model="searchObj.gpid" placeholder="股票id"></el-input>
             </el-form-item>
@@ -43,27 +43,29 @@
             <template>
                 <el-table :data="tableData" stripe style="width: 100%">
                     <!-- <el-table-column prop="date" type="index" label="序号" width="180"> -->
-                    <el-table-column prop="date" label="序号" width="180">
+                    <el-table-column prop="date" label="序号" style="width: 100%">
                         <template slot-scope="scope">
                             {{scope.$index+1}}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="gpid" label="股票id" width="180">
+                    <el-table-column prop="gpid" label="股票id" style="width:100%">
                     </el-table-column>
-                    <el-table-column prop="gpmc" label="股票名称" width="180">
+                    <el-table-column prop="gpmc" label="股票名称" style="width: 100%">
                     </el-table-column>
-                    <el-table-column prop="dqjg" label="当前价格">
+                    <el-table-column prop="dqjg" label="当前价格" style="width: 100%">
                     </el-table-column>
-                    <el-table-column prop="jkjg" label="监控价格">
+                    <el-table-column prop="ljy" label="逻辑与" style="width: 100%">
                     </el-table-column>
-                    <el-table-column prop="sfjk" label="是否监控">
+                    <el-table-column prop="jkjg" label="监控价格" style="width: 100%">
                     </el-table-column>
-                    <el-table-column prop="jkcs" label="监控次数">
+                    <el-table-column prop="sfjk" label="是否监控" style="width: 100%">
                     </el-table-column>
-                    <el-table-column prop="objemail" label="邮箱地址">
+                    <el-table-column prop="jkcs" label="监控次数" style="width: 100%">
+                    </el-table-column>
+                    <el-table-column prop="objemail" label="邮箱地址" style="width: 100%">
                     </el-table-column>
 
-                    <el-table-column prop="edit_gpxx" label="操作">
+                    <el-table-column prop="edit_gpxx" label="操作" style="width: 100%">
                         <template slot-scope="scope">
                             <!--增加信息按钮-->
                             <!-- <el-button type="info" icon="el-icon-message" @click="addGpxx()" circle></el-button> -->
@@ -72,7 +74,8 @@
                             <el-button type="primary" icon="el-icon-edit" @click="editGpxx(scope.row,scope.$index)"
                                 circle>
                             </el-button>
-                            <el-button type="danger" icon="el-icon-delete" @click="delUser(scope.row,scope.$index)" circle>
+                            <el-button type="danger" icon="el-icon-delete" @click="delUser(scope.row,scope.$index)"
+                                circle>
                             </el-button>
                             <!--删除按钮-->
                         </template>
@@ -91,6 +94,11 @@
                         <el-input v-model="editObj.gpmc"></el-input>
                     </el-form-item>
                     <el-form-item label="监控价格">
+                        <el-select v-model="sel_value" placeholder="请选择" style="width: 35%">
+                            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"
+                                :disabled="item.disabled">
+                            </el-option>
+                        </el-select>
                         <el-input v-model="editObj.jkjg"></el-input>
                     </el-form-item>
 
@@ -116,7 +124,7 @@
             <span slot="footer" class="dialog-footer">
                 <!-- <el-button @click="dialogVisible = false">取 消</el-button> -->
                 <el-button @click="editgpxxcancel()">取 消</el-button>
-                <el-button type="primary" @click="editgpxxconfirm(editObj)">确 定</el-button>
+                <el-button type="primary" @click="editgpxxconfirm(editObj,sel_value)">确 定</el-button>
             </span>
         </el-dialog>
 
@@ -129,7 +137,12 @@
                     <el-form-item label="股票名称">
                         <el-input v-model="addObj.gpmc" placeholder="可以不用输入股票名称"></el-input>
                     </el-form-item>
-                    <el-form-item label="监控价格">
+                    <el-form-item label="监控价格" style="width: 100%">
+                        <el-select v-model="sel_value" placeholder="请选择" style="width: 35%">
+                            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"
+                                :disabled="item.disabled">
+                            </el-option>
+                        </el-select>
                         <el-input v-model="addObj.jkjg"></el-input>
                     </el-form-item>
 
