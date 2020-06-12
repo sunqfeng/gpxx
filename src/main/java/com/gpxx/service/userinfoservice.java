@@ -1,8 +1,11 @@
 package com.gpxx.service;
 
+import org.springframework.stereotype.Service;
+
 import com.gpxx.entity.ReMsg;
 import com.gpxx.entity.userinfo;
 
+@Service
 public interface userinfoservice
 {
 	/*
@@ -38,5 +41,12 @@ public interface userinfoservice
 	 * @return
 	 */
 	Integer upd_userinfo_loginstatus_username(String loginstatus,String username);
+
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	ReMsg check_name(String name);
 
 }
