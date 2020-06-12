@@ -45,6 +45,13 @@ public class userinfoserviceimp implements userinfoservice
 			remsg.setMsg("该客户未登录");
 		}
 
+		if (stuserinfo.getUsername().trim().equals(username.trim()) ) //该用户已经存在
+		{
+			remsg.setCode("130");
+			remsg.setMsg("该用户已经存在");
+		}
+
+
 		return remsg;
 	}
 

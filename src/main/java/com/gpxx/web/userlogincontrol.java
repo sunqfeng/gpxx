@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpxx.entity.ReMsg;
@@ -95,5 +96,15 @@ public class userlogincontrol
 
 		return msg;
 	}
+
+	@RequestMapping("/check_name")
+	@ResponseBody
+	public ReMsg check_name(@RequestParam(value="name",required=true,defaultValue="")String name)
+	{
+		System.out.println("check_name ="+name);
+		msg = userinfoser.sel_userinfo_username(name);
+		return msg;
+	}
+
 
 }

@@ -4,6 +4,7 @@ var vmm = new Vue({
         return {
 
             // userinfo_dialogVisible:false, //密码或用户名输入错误提醒项
+            name: '',
             repassword: '',
             user_register: {
                 username: '',
@@ -90,7 +91,37 @@ var vmm = new Vue({
                 })
                 return;
             }
+        },
+
+        register_blur(regis_name) {
+
+            console.log("sqf re" + regis_name);
+            if (!regis_name) {
+                this.$message({
+                    message: '请输入用户名!!',
+                    type: 'warning'
+                });
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "./check_name",
+                data: {
+                    name: regis_name,
+                },
+                success: function (msg) {
+                    if(msg['code']==120 || msg['code']== 130 ) {
+                        vmm.$message({
+                            message: '该用户已经存在，请重新输入!!',
+                            type: 'warning'
+                        });
+                        return;
+                    }
+                }
+            });
         }
+
 
 
     }

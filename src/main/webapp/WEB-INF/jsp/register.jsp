@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
         <el-form ref="loginForm" :model="user_register" label-width="80px" class="login-box">
             <h3 class="login-title">欢迎注册</h3>
             <el-form-item label="账号" prop="username">
-                <el-input type="text" placeholder="请输入账号" v-model="user_register.username" />
+                <el-input type="text" placeholder="请输入账号" v-model="user_register.username" @blur="register_blur(user_register.username)"  />
             </el-form-item>
             <el-form-item label="密码" prop="passwd">
                 <el-input type="password" placeholder="请输入密码" v-model="user_register.passwd" />
