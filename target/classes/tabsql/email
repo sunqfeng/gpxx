@@ -1,0 +1,8 @@
+-- 创建用email参数表
+CREATE TABLE `email` (
+  `sedemail` varchar(20) NOT NULL  COMMENT '发送邮件方',
+  `objemail` varchar(20) COMMENT '收邮件方',
+  `sqm` varchar(30) NOT NULL COMMENT '发送方授权码',
+  `tmp` varchar(20)  COMMENT '扩展字段',
+  PRIMARY KEY (`sedemail`)
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='email参数表';
