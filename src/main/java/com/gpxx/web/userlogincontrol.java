@@ -97,6 +97,11 @@ public class userlogincontrol
 		return msg;
 	}
 
+	/**
+	 * 检查注册的用户名是否重复.
+	 * @param name
+	 * @return
+	 */
 	@RequestMapping("/check_name")
 	@ResponseBody
 	public ReMsg check_name(@RequestParam(value="name",required=true,defaultValue="")String name)
