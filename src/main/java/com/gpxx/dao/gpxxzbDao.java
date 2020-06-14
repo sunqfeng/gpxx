@@ -24,7 +24,7 @@ public interface gpxxzbDao
 	 * @param gpid
 	 * @return gpxxzb所以信息
 	 */
-	List<gpxxzb> sel_gpxxzb_gpid( @Param("gpid")int gpid );
+	List<gpxxzb> sel_gpxxzb_gpid( @Param("gpxxid")String gpxxid );
 
 	/**
 	 * 
@@ -38,7 +38,7 @@ public interface gpxxzbDao
 	 * @param gpid
 	 * @return
 	 */
-	Integer del_gpxxzb_gpid(@Param("gpid")String gpid);
+	Integer del_gpxxzb_gpid(@Param("gpxxid")String gpxxid);
 
 
 	/***
@@ -48,5 +48,7 @@ public interface gpxxzbDao
 	 */
 
 	List<gpxxzb> sel_gpxxzb_gpmc( @Param("gpmc")String gpmc );
+
+	Integer upd_gpxxzb_gpid(gpxxzb stgpxxzb);
 
 }

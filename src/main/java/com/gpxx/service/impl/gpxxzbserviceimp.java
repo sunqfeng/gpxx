@@ -23,7 +23,7 @@ public class gpxxzbserviceimp implements gpxxzbservice
 	@Autowired
 	private gpxxzbDao gpxxzbdao;
 
-	public List<gpxxzb> sel_gpxxzb_gpid(int gpid)
+	public List<gpxxzb> sel_gpxxzb_gpid(String gpid)
 	{
 		// TODO Auto-generated method stub
 		List<gpxxzb> listgpxxzb = new ArrayList<gpxxzb>();
@@ -58,5 +58,9 @@ public class gpxxzbserviceimp implements gpxxzbservice
 		return gpxxzbdao.sel_gpxxzb_gpmc(gpmc);
 	}
 
+	public Integer upd_gpxxzb_gpid(gpxxzb stgpxxzb)
+	{
+		return gpxxzbdao.upd_gpxxzb_gpid(stgpxxzb);
+	}
 
 }

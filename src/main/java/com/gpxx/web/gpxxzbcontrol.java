@@ -27,55 +27,51 @@ public class gpxxzbcontrol
 	@Autowired
 	private gpxxzbserviceimp gpxxzbimp;
 
+
+	/*
+	 *  页面跳转至股票买卖登记页面 
+	 */
+	@RequestMapping("/regis_gpxxzb")
+	private String regis_gpxxzb()
+	{
+
+		return "regis_gpxxzb";
+
+	}
+
 	/**
 	 * 
-	 * 显示所有股票的信息，不进行分页
+	 * 根据gpxxid查询股票信息表
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/sqf")
-//	@ResponseBody /* @ResponseBody 表明返回的是 json串;不加表明是页面跳转 */
-	private String list(Model model)
+	@RequestMapping("/sel_gpxxzb_gpxxid")
+	@ResponseBody /* @ResponseBody 表明返回的是 json串;不加表明是页面跳转 */
+	private List<gpxxzb> sel_gpxxzb_gpxxid(@RequestBody gpxxzb stGpxxzb_in)
 	{
-
-		int gpid = 1;
-		List<gpxxzb> gpxxzb_list = new ArrayList<gpxxzb>();
-
-		gpxxzb_list = gpxxzbimp.sel_gpxxzb_gpid(gpid);
-
-		model.addAttribute("gpxxzb", gpxxzb_list);
-		return "index2";
-
+		System.out.println("sqf 2020年6月14日16:18:18  ="+stGpxxzb_in.getGpxxid());
+		List<gpxxzb> stGpxxzb = new ArrayList<gpxxzb>() ;
+		stGpxxzb =  gpxxzbimp.sel_gpxxzb_gpid(stGpxxzb_in.getGpxxid());
+		return stGpxxzb;
 	}
 
-	/*
-	 * 查询返回所有的
-	 * 
-	 * 
-	 */
-	@RequestMapping("/all")
-	private String all(Model model)
-	{
-
-//		List<gpxxzb> gpxxzb_list = new ArrayList<gpxxzb>();
-//
-//		gpxxzb_list = gpxxzbimp.sel_gpxxzb_all();
-//		model.addAttribute("gpxxzb", gpxxzb_list);
-		return "index2";
-
-	}
 
 	/**
 	 * 插入gpxxzb信息
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/insert")
+	@RequestMapping("/insert_gpxxzb")
 	@ResponseBody
-	public  String insert(@RequestBody  gpxxzb stgpxxzb)
+	public  List<gpxxzb> insert_gpxxzb(@RequestBody  gpxxzb stgpxxzb)
 	{
-		gpxxzbimp.insertgpxxzb(stgpxxzb);
-		return "redirect:/all"; /*control 层内跳转*/
+		List<gpxxzb> list_gpxxzb = new ArrayList<gpxxzb>();
+		System.out.println("sqf insert_gpxxzb 000"+stgpxxzb.getGpxxid());
+		gpxxzbimp.insertgpxxzb(stgpxxzb); //插入股票交易信息
+		//插入股票交易信息以后，进行股票信息查询
+		list_gpxxzb = gpxxzbimp.sel_gpxxzb_gpid(stgpxxzb.getGpxxid());
+
+		return list_gpxxzb; /*control 层内跳转*/
 	}
 
 	/**
@@ -87,29 +83,30 @@ public class gpxxzbcontrol
 	@ResponseBody
 	public  String del_gpxxzb_gpid(@RequestBody  gpxxzb stgpxxzb)
 	{
-		System.out.println( "sqf1111="+stgpxxzb.getGpid() );
-		gpxxzbimp.del_gpxxzb_gpid(stgpxxzb.getGpid());
+		System.out.println( "sqf1111="+stgpxxzb.getGpxxid() );
+		gpxxzbimp.del_gpxxzb_gpid(stgpxxzb.getGpxxid());
 		return "redirect:/all"; /*control 层内跳转*/
 	}
 
 	/**
 	 * 
-	 * 显示所有股票的信息，不进行分页
+	 *  更新股票信息表
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/sqf1")
-//	@ResponseBody /* @ResponseBody 表明返回的是 json串;不加表明是页面跳转 */
-	public String gpxxzb_gpmc(Model model)
+	@RequestMapping("/upd_gpxxzb_gpid")
+	@ResponseBody /* @ResponseBody 表明返回的是 json串;不加表明是页面跳转 */
+	public List<gpxxzb> upd_gpxxzb_gpid(@RequestBody  gpxxzb stgpxxzb)
 	{
 
-//		List<gpxxzb> gpxxzb_list = new ArrayList<gpxxzb>();
-//
-//		gpxxzb_list = gpxxzbimp.sel_gpxxzb_gpmc("XO");
-//
-//		model.addAttribute("gpxxzb", gpxxzb_list);
+		List<gpxxzb> list_Gpxxzb = new ArrayList<gpxxzb>();
 
-		return "student"; 
+		System.out.println("update sqf ="+stgpxxzb.toString());
+		Integer result = gpxxzbimp.upd_gpxxzb_gpid(stgpxxzb);
+
+		list_Gpxxzb = gpxxzbimp.sel_gpxxzb_gpid(stgpxxzb.getGpxxid());
+
+		return list_Gpxxzb; 
 	}
 
 }

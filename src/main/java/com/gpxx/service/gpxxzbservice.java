@@ -13,7 +13,7 @@ public interface gpxxzbservice
 	 * 
 	 */
 
-	List<gpxxzb> sel_gpxxzb_gpid(int gpid);
+	List<gpxxzb> sel_gpxxzb_gpid(String gpid);
 
 	/**
 	 *  查询gpxxzb所有信息，无条件查询
@@ -55,4 +55,6 @@ public interface gpxxzbservice
 	 */
 	List<gpxxzb> sel_gpxxzb_gpmc(String gpmc);
 
+
+	Integer upd_gpxxzb_gpid(gpxxzb stgpxxzb);
 }

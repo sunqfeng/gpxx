@@ -4,13 +4,13 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gpxx.dao.gpxxzbDao">
 	<insert id="insertgpxxzb" parameterType="gpxxzb">
-		INSERT ignore INTO gpxxzb (gpid,gpmc,mrsj,mrjg,mcsj,mcjg,gpsl,gpje,gpts,gpsy)
-		VALUES (#{gpid},#{gpmc},#{mrsj},#{mrjg},#{mcsj},#{mcjg},#{gpsl},#{gpje},#{gpts},#{gpsy})
+		INSERT ignore INTO gpxxzb (gpxxid,gpmc,mrsj,mrjg,mcsj,mcjg,gpsl,gpje,gpts,gpsy)
+		VALUES (#{gpxxid},#{gpmc},#{mrsj},#{mrjg},#{mcsj},#{mcjg},#{gpsl},#{gpje},#{gpts},#{gpsy})
 	</insert>
 
-	<select id="sel_gpxxzb_gpid" resultType="gpxxzb" parameterType="int">
+	<select id="sel_gpxxzb_gpid" resultType="gpxxzb" parameterType="String">
 		<!-- 具体的sql -->
-		select *from gpxxzb where gpid = #{gpid}
+		select *from gpxxzb where gpxxid = #{gpxxid}
 	</select>
 
 	<select id="sel_gpxxzb_gpmc" resultType="gpxxzb" parameterType="String">
@@ -26,8 +26,25 @@
 	
 	<select id="del_gpxxzb_gpid" parameterType="String" resultType="Integer">
 	<!-- 具体的sql -->
-		delete from gpxxzb  where gpid=#{gpid};
+		delete from gpxxzb  where gpxxid=#{gpxxid};
 	</select>
+
+	<update id="upd_gpxxzb_gpid" parameterType="gpxxzb">
+		update gpxxzb
+		<set>
+			<if test="gpxxid!= null">gpxxid=#{gpxxid},</if>
+			<if test="gpmc != null">gpmc=#{gpmc},</if>
+			<if test="mrsj!= null">mrsj=#{mrsj},</if>
+			<if test="mrjg != null">mrjg=#{mrjg},</if>
+			<if test="mcsj!= null">mcsj=#{mcsj},</if>
+			<if test="mcjg!= null">mcjg=#{mcjg},</if>
+			<if test="gpsl!= null">gpsl=#{gpsl},</if>
+			<if test="gpje!= null">gpje=#{gpje},</if>
+			<if test="gpts!= null">gpts=#{gpts},</if>
+			<if test="gpsy!= null">gpsy=#{gpsy},</if>
+		</set>
+		where gpxxid=#{gpxxid}
+	</update>
 	
 	
 	

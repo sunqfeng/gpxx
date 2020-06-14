@@ -2,7 +2,7 @@ package com.gpxx.entity;
 
 public class gpxxzb
 {
-	private String gpid;
+	private String gpxxid;
 	private String gpmc;
 	private String mrsj;
 	private double mrjg;
@@ -13,91 +13,133 @@ public class gpxxzb
 	private Integer   gpts;
 	private double gpsy;
 
-	public String getGpid()
+
+	public String getGpxxid()
 	{
-		return gpid;
+		return gpxxid;
 	}
-	public void setGpid(String gpid)
+
+
+	public void setGpxxid(String gpxxid)
 	{
-		this.gpid = gpid;
+		this.gpxxid = gpxxid;
 	}
+
+
 	public String getGpmc()
 	{
 		return gpmc;
 	}
+
+
 	public void setGpmc(String gpmc)
 	{
 		this.gpmc = gpmc;
 	}
+
+
 	public String getMrsj()
 	{
 		return mrsj;
 	}
+
+
 	public void setMrsj(String mrsj)
 	{
 		this.mrsj = mrsj;
 	}
+
+
 	public double getMrjg()
 	{
 		return mrjg;
 	}
+
+
 	public void setMrjg(double mrjg)
 	{
 		this.mrjg = mrjg;
 	}
+
+
 	public String getMcsj()
 	{
 		return mcsj;
 	}
+
+
 	public void setMcsj(String mcsj)
 	{
 		this.mcsj = mcsj;
 	}
+
+
 	public double getMcjg()
 	{
 		return mcjg;
 	}
+
+
 	public void setMcjg(double mcjg)
 	{
 		this.mcjg = mcjg;
 	}
-	public int getGpsl()
+
+
+	public Integer getGpsl()
 	{
 		return gpsl;
 	}
-	public void setGpsl(int gpsl)
+
+
+	public void setGpsl(Integer gpsl)
 	{
 		this.gpsl = gpsl;
 	}
+
+
 	public double getGpje()
 	{
 		return gpje;
 	}
+
+
 	public void setGpje(double gpje)
 	{
 		this.gpje = gpje;
 	}
-	public int getGpts()
+
+
+	public Integer getGpts()
 	{
 		return gpts;
 	}
-	public void setGpts(int gpts)
+
+
+	public void setGpts(Integer gpts)
 	{
 		this.gpts = gpts;
 	}
+
+
 	public double getGpsy()
 	{
 		return gpsy;
 	}
+
+
 	public void setGpsy(double gpsy)
 	{
 		this.gpsy = gpsy;
 	}
 
+
 	@Override
 	public String toString()
 	{
-		return "gpxxzb [gpid=" + gpid + ", gpmc=" + gpmc + ", mrsj=" + mrsj + ", mrjg=" + mrjg + ", mcsj=" + mcsj
+		return "gpxxzb [gpxxid=" + gpxxid + ", gpmc=" + gpmc + ", mrsj=" + mrsj + ", mrjg=" + mrjg + ", mcsj=" + mcsj
 				+ ", mcjg=" + mcjg + ", gpsl=" + gpsl + ", gpje=" + gpje + ", gpts=" + gpts + ", gpsy=" + gpsy + "]";
 	}
+	
+
 }
