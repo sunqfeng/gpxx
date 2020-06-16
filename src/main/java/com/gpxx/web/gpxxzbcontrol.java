@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.gpxx.entity.ReMsg;
 import com.gpxx.entity.gpxxzb;
 import com.gpxx.service.impl.gpxxzbserviceimp;
+import com.gpxx.service.impl.userinfoserviceimp;
 
 @Controller
 public class gpxxzbcontrol
@@ -27,16 +28,35 @@ public class gpxxzbcontrol
 	@Autowired
 	private gpxxzbserviceimp gpxxzbimp;
 
+	@Autowired
+	private userinfoserviceimp stuserinfoimp;
+
+	ReMsg reMsg = new ReMsg();
 
 	/*
 	 *  页面跳转至股票买卖登记页面 
 	 */
 	@RequestMapping("/regis_gpxxzb")
-	private String regis_gpxxzb()
+	private String regis_gpxxzb(HttpServletRequest request)
 	{
 
-		return "regis_gpxxzb";
+		String username = (String) request.getSession().getAttribute("username");
+		System.out.println("sqf+session=" + username);
 
+		if (username == null || username.equals(""))
+		{
+			System.out.println("该客户未登录请登录");
+			return "login";
+		}
+
+		reMsg = stuserinfoimp.sel_userinfo_username(username);
+		if (reMsg.getCode().equals("120"))
+		{
+			System.out.println("该客户未登录请登录");
+			return "login";
+		}
+
+		return "regis_gpxxzb";
 	}
 
 	/**

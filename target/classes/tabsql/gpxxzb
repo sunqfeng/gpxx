@@ -1,14 +1,12 @@
--- 创建股票信息主表
 CREATE TABLE `gpxxzb` (
-  `gpid` varchar(15) NOT NULL  COMMENT '股票id',
+  `gpxxid` varchar(15) NOT NULL  COMMENT '股票id',
   `gpmc` varchar(100)  COMMENT '股票名称',
-  `mrsj` varchar(10) NOT NULL COMMENT '买入时间',
+  `mrsj` varchar(20) NOT NULL COMMENT '买入时间',
   `mrjg` double(16,8) NOT NULL COMMENT '买入价',
-  `mcsj` varchar(10)  COMMENT '卖出时间',
+  `mcsj` varchar(20)  COMMENT '卖出时间',
   `mcjg` double(16,8)  COMMENT '卖出价',
   `gpsl` int(10)  COMMENT '股票数量',
   `gpje` double(16,8) NOT NULL COMMENT '股票金额',
   `gpts` int(10) COMMENT '股票天数(卖出日-买入日)',
-  `gpsy` double(16,8) COMMENT '股票收益',
-  PRIMARY KEY (`gpid`)
+  `gpsy` double(16,8) COMMENT '股票收益'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='股票信息主表'

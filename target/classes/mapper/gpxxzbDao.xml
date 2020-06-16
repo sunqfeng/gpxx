@@ -43,7 +43,7 @@
 			<if test="gpts!= null">gpts=#{gpts},</if>
 			<if test="gpsy!= null">gpsy=#{gpsy},</if>
 		</set>
-		where gpxxid=#{gpxxid}
+		where gpxxid=#{gpxxid} and mrsj=#{mrsj}
 	</update>
 	
 	

@@ -28,7 +28,7 @@
                       {
                           field: "mcsj",
                           title: "卖出时间",
-                          width: 100
+                          width: 120
                       },
                       {
                           field: "mcjg",
@@ -47,7 +47,7 @@
                       },
                       {
                           field: "gpts",
-                          title: "股票天数",
+                          title: "持有股票天数",
                           width: 100
                       },
                       {
@@ -58,20 +58,70 @@
                   ],
                   data: [],
               },
+
+              isflag: '0',
+              sear_gpxxid: '',
+              sear_gpmc: '',
           }
       },
       methods: {
-          //读取表格数据
-          // readMasterUser() {
-          //     //根据实际情况，自己改下啊 
-          //     app.gpxx.data.map(i => {
-          //         i.id = generateId.get();//模拟后台插入成功后有了id
-          //         i.isSet=false;//给后台返回数据添加`isSet`标识
-          //         return i;
-          //     });
-          // },
+
+          search(sear_gpxxid, sear_gpmc) { //按股票id号与股票名称进行gxxzb的信息搜索
+              app.gpxx.data = [];
+              app.sear_gpxxid = "";
+              app.sear_gpmc = "";
+              console.log("serach sqf" + sear_gpxxid + "|" + sear_gpmc);
+              if (!sear_gpxxid && !sear_gpmc) {
+                  app.$message({
+                      type: 'warning',
+                      message: '请输入股票id号或者股票名称',
+                  })
+              }
+              var numReg = /^[0-9]*$/
+              var numRe = new RegExp(numReg)
+              if (!numRe.test(sear_gpxxid)) {
+                  this.$message({
+                      type: 'warning',
+                      message: '请输入数字 ',
+                  })
+                  return false
+              }
+
+              data = {
+                  gpxxid: sear_gpxxid,
+                  gpmc: sear_gpmc,
+              };
+              if (sear_gpxxid) { //按股票id查询股票交易信息
+                  $.ajax({
+                      type: "POST",
+                      contentType: "application/json; charset=utf-8",
+                      //   dataType: "dataType",
+                      url: "sel_gpxxzb_gpxxid",
+                      data: JSON.stringify(data),
+                      success: function (stGpxxzb) {
+
+                          if (stGpxxzb.length == 0) {
+                              app.$message({
+                                  type: 'waring',
+                                  message: "查询不到该股票信息!"
+                              });
+                              return;
+                          }
+
+                          for (var i = 0; i < stGpxxzb.length; i++) {
+                              app.gpxx.data.push(stGpxxzb[i]);
+                          }
+                      }
+                  });
+              } else {
+
+              }
+
+          },
+
           //添加账号
           addMasterUser() {
+              app.isflag = '1';
               for (let i of app.gpxx.data) {
                   if (i.isSet) return app.$message.warning("请先保存当前编辑项");
               }
@@ -122,90 +172,62 @@
                           return;
                       } else //进行gpid信息查询
                       {
-                          $.ajax({
-                              type: "POST",
-                              contentType: "application/json; charset=utf-8",
-                              url: "./sel_gpxxzb_gpxxid",
-                              data: JSON.stringify(data),
-                              success: function (stGpxxzb) {
-                                  console.log("lenght"+stGpxxzb.length);
-                                  if (stGpxxzb.length >= 1) { //查询出来数据,说明存在进行update操作
-                                      $.ajax({
-                                          type: "POST",
-                                          contentType: "application/json; charset=utf-8",
-                                        //   dataType: "dataType",
-                                          url: "./upd_gpxxzb_gpid",
-                                          data: JSON.stringify(data),
-                                          success: function (list_Gpxxzb) {
-                                              if (list_Gpxxzb.length == 0) {
-                                                  app.$message({
-                                                      type: 'error',
-                                                      message: "更新失败!"
-                                                  });
-                                                  return;
-                                              }
-                                              app.gpxx.data = [];
-                                              for (var i = 0; i < list_Gpxxzb.length; i++) {
-                                                  app.gpxx.data.push(list_Gpxxzb[i]);
-                                              }
 
-                                          }
-                                      });
+                          if (app.isflag == 1) //执行insert操作
+                          {
 
-                                      return;
-                                  } else if (stGpxxzb.length == 0) { //说明以前没有gpxx，进行inser操作
-                                      console.log("insert sqf " + data.gpxxid);
-                                      $.ajax({
-                                          type: "POST",
-                                          contentType: "application/json; charset=utf-8",
-                                          //   dataType: "dataType",
-                                          url: "./insert_gpxxzb",
-                                          data: JSON.stringify(data),
-                                          success: function (list_gpxxzb) {
-                                              if (list_gpxxzb.length == 0) {
-                                                  app.$message({
-                                                      type: 'error',
-                                                      message: "保存失败!"
-                                                  });
-                                                  return;
-                                              }
-                                              app.gpxx.data = [];
-                                              for (var i = 0; i < list_gpxxzb.length; i++) {
-                                                  app.gpxx.data.push(list_gpxxzb[i]);
-                                              }
-                                          }
-                                      });
+                              console.log("insert sqf 000");
+
+                              $.ajax({
+                                  type: "POST",
+                                  contentType: "application/json; charset=utf-8",
+                                  //   dataType: "dataType",
+                                  url: "./insert_gpxxzb",
+                                  data: JSON.stringify(data),
+                                  success: function (list_gpxxzb) {
+                                      if (list_gpxxzb.length == 0) {
+                                          app.$message({
+                                              type: 'error',
+                                              message: "保存失败!"
+                                          });
+                                          return;
+                                      }
+                                      app.gpxx.data = [];
+                                      for (var i = 0; i < list_gpxxzb.length; i++) {
+                                          app.gpxx.data.push(list_gpxxzb[i]);
+                                      }
+                                  }
+                              });
+                          } else { //执行update操作
+
+                              console.log("sqf update caozuo");
+
+                              $.ajax({
+                                  type: "POST",
+                                  contentType: "application/json; charset=utf-8",
+                                  //   dataType: "dataType",
+                                  url: "./upd_gpxxzb_gpid",
+                                  data: JSON.stringify(data),
+                                  success: function (list_Gpxxzb) {
+                                      if (list_Gpxxzb.length == 0) {
+                                          app.$message({
+                                              type: 'error',
+                                              message: "更新失败!"
+                                          });
+                                          return;
+                                      }
+                                      app.gpxx.data = [];
+                                      for (var i = 0; i < list_Gpxxzb.length; i++) {
+                                          app.gpxx.data.push(list_Gpxxzb[i]);
+                                      }
 
                                   }
-                              }
-                          });
+                              });
+                          }
                       }
-
-                      //   $.ajax({
-                      //       type: "POST",
-                      //       contentType: "application/json; charset=utf-8",
-                      //       //   dataType: "dataType",
-                      //       url: "./insert_gpxxzb",
-                      //       data: JSON.stringify(data),
-                      //       success: function (list_gpxxzb) {
-                      //           if (list_gpxxzb.length == 0) {
-                      //               app.$message({
-                      //                   type: 'error',
-                      //                   message: "保存失败!"
-                      //               });
-                      //               return;
-                      //           }
-                      //           app.gpxx.data = [];
-                      //           for (var i = 0; i < list_gpxxzb.length; i++) {
-                      //               app.gpxx.data.push(list_gpxxzb[i]);
-                      //           }
-                      //       }
-                      //   });
-                      //   for (let k in data) row[k] = data[k];
-                      //然后这边重新读取表格数据
-                      //   app.readMasterUser();
                       row.isSet = false;
                   })();
+                 app.isflag = '0';
               } else {
                   app.gpxx.sel = JSON.parse(JSON.stringify(row));
                   row.isSet = true;

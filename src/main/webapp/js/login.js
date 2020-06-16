@@ -43,13 +43,13 @@ var vmm = new Vue({
                             message: '该用户不存在或密码错误',
                             type: 'error'
                         });
-                    } else { //登录成功以后进行股票监控界面
+                    } else { //登录成功以后跳转到gpxxhome页面
                         $.ajax({
                             type: "GET",
-                            url: "./jkgpxx_index",
+                            url: "./gpxxhome",
                             data: "data",
                             success: function (response) {
-                                window.location.href = './jkgpxx_index';
+                                window.location.href = './gpxxhome';
                             }
                         });
 
