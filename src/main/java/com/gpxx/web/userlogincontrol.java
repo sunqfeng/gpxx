@@ -19,6 +19,7 @@ public class userlogincontrol
 {
 	@Autowired // @Autowired 必须要加上
 	private userinfoserviceimp userinfoser;
+
 	private ReMsg msg; 
 
 	/**
@@ -108,6 +109,7 @@ public class userlogincontrol
 	{
 		System.out.println("check_name ="+name);
 		msg = userinfoser.sel_userinfo_username(name);
+		System.out.println("check_name="+msg.toString());
 		return msg;
 	}
 
